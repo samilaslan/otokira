@@ -1,0 +1,597 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0A38D89E-2005-491B-8109-B6C1935F9670}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>otokira</RootNamespace>
+    <AssemblyName>otokira</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UpgradeBackupLocation />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Oracle.DataAccess, Version=4.121.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\app\pc_samil\product\12.1.0\client_1\odp.net\bin\4\Oracle.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Mobile" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="Telerik.Web.Design">
+      <HintPath>..\lib\RCAJAX\2018.2.710.45\Telerik.Web.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Web.Spreadsheet">
+      <HintPath>..\lib\RCAJAX\2018.2.710.45\AdditionalLibraries\Bin45\Telerik.Web.Spreadsheet.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Web.UI">
+      <HintPath>..\lib\RCAJAX\2018.2.710.45\Telerik.Web.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Web.UI.Skins">
+      <HintPath>..\lib\RCAJAX\2018.2.710.45\Telerik.Web.UI.Skins.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Core">
+      <HintPath>..\lib\RCAJAX\2018.2.710.45\AdditionalLibraries\Bin45\Telerik.Windows.Documents.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Flow">
+      <HintPath>..\lib\RCAJAX\2018.2.710.45\AdditionalLibraries\Bin45\Telerik.Windows.Documents.Flow.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Spreadsheet">
+      <HintPath>..\lib\RCAJAX\2018.2.710.45\AdditionalLibraries\Bin45\Telerik.Windows.Documents.Spreadsheet.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Spreadsheet.FormatProviders.OpenXml">
+      <HintPath>..\lib\RCAJAX\2018.2.710.45\AdditionalLibraries\Bin45\Telerik.Windows.Documents.Spreadsheet.FormatProviders.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Zip">
+      <HintPath>..\lib\RCAJAX\2018.2.710.45\AdditionalLibraries\Bin45\Telerik.Windows.Zip.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmArac.aspx.cs">
+      <DependentUpon>frmArac.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmArac.aspx.designer.cs">
+      <DependentUpon>frmArac.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmAracKirala.aspx.cs">
+      <DependentUpon>frmAracKirala.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmAracKirala.aspx.designer.cs">
+      <DependentUpon>frmAracKirala.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmMusteri.aspx.cs">
+      <DependentUpon>frmMusteri.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmMusteri.aspx.designer.cs">
+      <DependentUpon>frmMusteri.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OtoKira.Master.cs">
+      <DependentUpon>OtoKira.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OtoKira.Master.designer.cs">
+      <DependentUpon>OtoKira.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\RadCaptcha\0.wav" />
+    <Content Include="App_Data\RadCaptcha\1.wav" />
+    <Content Include="App_Data\RadCaptcha\2.wav" />
+    <Content Include="App_Data\RadCaptcha\3.wav" />
+    <Content Include="App_Data\RadCaptcha\4.wav" />
+    <Content Include="App_Data\RadCaptcha\5.wav" />
+    <Content Include="App_Data\RadCaptcha\6.wav" />
+    <Content Include="App_Data\RadCaptcha\7.wav" />
+    <Content Include="App_Data\RadCaptcha\8.wav" />
+    <Content Include="App_Data\RadCaptcha\9.wav" />
+    <Content Include="App_Data\RadCaptcha\A.wav" />
+    <Content Include="App_Data\RadCaptcha\B.wav" />
+    <Content Include="App_Data\RadCaptcha\C.wav" />
+    <Content Include="App_Data\RadCaptcha\D.wav" />
+    <Content Include="App_Data\RadCaptcha\E.wav" />
+    <Content Include="App_Data\RadCaptcha\F.wav" />
+    <Content Include="App_Data\RadCaptcha\G.wav" />
+    <Content Include="App_Data\RadCaptcha\H.wav" />
+    <Content Include="App_Data\RadCaptcha\I.wav" />
+    <Content Include="App_Data\RadCaptcha\J.wav" />
+    <Content Include="App_Data\RadCaptcha\K.wav" />
+    <Content Include="App_Data\RadCaptcha\L.wav" />
+    <Content Include="App_Data\RadCaptcha\M.wav" />
+    <Content Include="App_Data\RadCaptcha\N.wav" />
+    <Content Include="App_Data\RadCaptcha\O.wav" />
+    <Content Include="App_Data\RadCaptcha\P.wav" />
+    <Content Include="App_Data\RadCaptcha\Q.wav" />
+    <Content Include="App_Data\RadCaptcha\R.wav" />
+    <Content Include="App_Data\RadCaptcha\S.wav" />
+    <Content Include="App_Data\RadCaptcha\T.wav" />
+    <Content Include="App_Data\RadCaptcha\U.wav" />
+    <Content Include="App_Data\RadCaptcha\V.wav" />
+    <Content Include="App_Data\RadCaptcha\W.wav" />
+    <Content Include="App_Data\RadCaptcha\X.wav" />
+    <Content Include="App_Data\RadCaptcha\Y.wav" />
+    <Content Include="App_Data\RadCaptcha\Z.wav" />
+    <Content Include="Images\imgCheck24e.png" />
+    <Content Include="Images\imgCheck24n.png" />
+    <Content Include="Login.aspx" />
+    <Content Include="Default.aspx" />
+    <Content Include="frmArac.aspx" />
+    <Content Include="frmAracKirala.aspx" />
+    <Content Include="frmMusteri.aspx" />
+    <Content Include="Images\ImgDelete.png" />
+    <Content Include="Images\ImgHata.png" />
+    <Content Include="Images\ImgOk.png" />
+    <Content Include="imgSil.png" />
+    <Content Include="Styles\css\adminlte.css" />
+    <Content Include="Styles\css\adminlte.min.css" />
+    <Content Include="Styles\css\alt\adminlte.components.css" />
+    <Content Include="Styles\css\alt\adminlte.components.min.css" />
+    <Content Include="Styles\css\alt\adminlte.core.css" />
+    <Content Include="Styles\css\alt\adminlte.core.min.css" />
+    <Content Include="Styles\css\alt\adminlte.extra-components.css" />
+    <Content Include="Styles\css\alt\adminlte.extra-components.min.css" />
+    <Content Include="Styles\css\alt\adminlte.pages.css" />
+    <Content Include="Styles\css\alt\adminlte.pages.min.css" />
+    <Content Include="Styles\css\alt\adminlte.plugins.css" />
+    <Content Include="Styles\css\alt\adminlte.plugins.min.css" />
+    <Content Include="Styles\OverlayScrollbars.css" />
+    <Content Include="Styles\OverlayScrollbars.min.css" />
+    <Content Include="Styles\plugins\bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="Styles\plugins\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="Styles\plugins\bootstrap\js\bootstrap.js" />
+    <Content Include="Styles\plugins\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Styles\plugins\datatables\jquery.dataTables.js" />
+    <Content Include="Styles\plugins\datatables\jquery.dataTables.min.js" />
+    <Content Include="Styles\plugins\fontawesome-free\css\all.css" />
+    <Content Include="Styles\plugins\fontawesome-free\css\all.min.css" />
+    <Content Include="Styles\plugins\fontawesome-free\css\brands.css" />
+    <Content Include="Styles\plugins\fontawesome-free\css\brands.min.css" />
+    <Content Include="Styles\plugins\fontawesome-free\css\fontawesome.css" />
+    <Content Include="Styles\plugins\fontawesome-free\css\fontawesome.min.css" />
+    <Content Include="Styles\plugins\fontawesome-free\css\regular.css" />
+    <Content Include="Styles\plugins\fontawesome-free\css\regular.min.css" />
+    <Content Include="Styles\plugins\fontawesome-free\css\solid.css" />
+    <Content Include="Styles\plugins\fontawesome-free\css\solid.min.css" />
+    <Content Include="Styles\plugins\fontawesome-free\css\svg-with-js.css" />
+    <Content Include="Styles\plugins\fontawesome-free\css\svg-with-js.min.css" />
+    <Content Include="Styles\plugins\fontawesome-free\css\v4-shims.css" />
+    <Content Include="Styles\plugins\fontawesome-free\css\v4-shims.min.css" />
+    <Content Include="Styles\plugins\fontawesome-free\webfonts\fa-brands-400.svg" />
+    <Content Include="Styles\plugins\fontawesome-free\webfonts\fa-regular-400.svg" />
+    <Content Include="Styles\plugins\fontawesome-free\webfonts\fa-solid-900.svg" />
+    <Content Include="Styles\plugins\fullcalendar\LICENSE.txt" />
+    <Content Include="Styles\plugins\fullcalendar\locales-all.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales-all.min.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\af.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\ar-dz.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\ar-kw.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\ar-ly.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\ar-ma.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\ar-sa.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\ar-tn.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\ar.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\az.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\bg.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\bs.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\ca.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\cs.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\da.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\de.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\el.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\en-au.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\en-gb.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\en-nz.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\es-us.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\es.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\et.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\eu.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\fa.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\fi.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\fr-ca.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\fr-ch.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\fr.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\gl.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\he.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\hi.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\hr.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\hu.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\id.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\is.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\it.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\ja.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\ka.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\kk.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\ko.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\lb.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\lt.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\lv.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\mk.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\ms.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\nb.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\nl.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\nn.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\pl.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\pt-br.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\pt.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\ro.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\ru.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\sk.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\sl.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\sq.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\sr-cyrl.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\sr.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\sv.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\th.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\tr.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\ug.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\uk.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\uz.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\vi.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\zh-cn.js" />
+    <Content Include="Styles\plugins\fullcalendar\locales\zh-tw.js" />
+    <Content Include="Styles\plugins\fullcalendar\main.css" />
+    <Content Include="Styles\plugins\fullcalendar\main.esm.js" />
+    <Content Include="Styles\plugins\fullcalendar\main.js" />
+    <Content Include="Styles\plugins\fullcalendar\main.min.css" />
+    <Content Include="Styles\plugins\fullcalendar\main.min.js" />
+    <Content Include="Styles\plugins\icheck-bootstrap\icheck-bootstrap.css" />
+    <Content Include="Styles\plugins\icheck-bootstrap\icheck-bootstrap.min.css" />
+    <Content Include="Styles\plugins\inputmask\bindings\inputmask.binding.js" />
+    <Content Include="Styles\plugins\inputmask\inputmask.js" />
+    <Content Include="Styles\plugins\inputmask\inputmask.min.js" />
+    <Content Include="Styles\plugins\inputmask\inputmask\bindings\inputmask.binding.js" />
+    <Content Include="Styles\plugins\inputmask\inputmask\dependencyLibs\inputmask.dependencyLib.jqlite.js" />
+    <Content Include="Styles\plugins\inputmask\inputmask\dependencyLibs\inputmask.dependencyLib.jquery.js" />
+    <Content Include="Styles\plugins\inputmask\inputmask\dependencyLibs\inputmask.dependencyLib.js" />
+    <Content Include="Styles\plugins\inputmask\inputmask\global\window.js" />
+    <Content Include="Styles\plugins\inputmask\inputmask\inputmask.date.extensions.js" />
+    <Content Include="Styles\plugins\inputmask\inputmask\inputmask.extensions.js" />
+    <Content Include="Styles\plugins\inputmask\inputmask\inputmask.js" />
+    <Content Include="Styles\plugins\inputmask\inputmask\inputmask.numeric.extensions.js" />
+    <Content Include="Styles\plugins\inputmask\inputmask\jquery.inputmask.js" />
+    <Content Include="Styles\plugins\inputmask\jquery.inputmask.bundle.js" />
+    <Content Include="Styles\plugins\inputmask\jquery.inputmask.js" />
+    <Content Include="Styles\plugins\inputmask\jquery.inputmask.min.js" />
+    <Content Include="Styles\plugins\inputmask\min\inputmask\bindings\inputmask.binding.min.js" />
+    <Content Include="Styles\plugins\inputmask\min\inputmask\dependencyLibs\inputmask.dependencyLib.jqlite.min.js" />
+    <Content Include="Styles\plugins\inputmask\min\inputmask\dependencyLibs\inputmask.dependencyLib.jquery.min.js" />
+    <Content Include="Styles\plugins\inputmask\min\inputmask\dependencyLibs\inputmask.dependencyLib.min.js" />
+    <Content Include="Styles\plugins\inputmask\min\inputmask\global\window.min.js" />
+    <Content Include="Styles\plugins\inputmask\min\inputmask\inputmask.date.extensions.min.js" />
+    <Content Include="Styles\plugins\inputmask\min\inputmask\inputmask.extensions.min.js" />
+    <Content Include="Styles\plugins\inputmask\min\inputmask\inputmask.min.js" />
+    <Content Include="Styles\plugins\inputmask\min\inputmask\inputmask.numeric.extensions.min.js" />
+    <Content Include="Styles\plugins\inputmask\min\inputmask\jquery.inputmask.min.js" />
+    <Content Include="Styles\plugins\inputmask\min\jquery.inputmask.bundle.min.js" />
+    <Content Include="Styles\plugins\jquery\core.js" />
+    <Content Include="Styles\plugins\jquery\jquery.js" />
+    <Content Include="Styles\plugins\jquery\jquery.min.js" />
+    <Content Include="Styles\plugins\jquery\jquery.slim.js" />
+    <Content Include="Styles\plugins\jquery\jquery.slim.min.js" />
+    <Content Include="Styles\plugins\overlayScrollbars\css\OverlayScrollbars.css" />
+    <Content Include="Styles\plugins\overlayScrollbars\css\OverlayScrollbars.min.css" />
+    <Content Include="Styles\plugins\overlayScrollbars\js\jquery.overlayScrollbars.js" />
+    <Content Include="Styles\plugins\overlayScrollbars\js\jquery.overlayScrollbars.min.js" />
+    <Content Include="Styles\plugins\overlayScrollbars\js\OverlayScrollbars.js" />
+    <Content Include="Styles\plugins\overlayScrollbars\js\OverlayScrollbars.min.js" />
+    <Content Include="Styles\plugins\select2\css\select2.css" />
+    <Content Include="Styles\plugins\select2\css\select2.min.css" />
+    <Content Include="Styles\plugins\select2\js\i18n\af.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\ar.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\az.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\bg.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\bn.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\bs.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\build.txt" />
+    <Content Include="Styles\plugins\select2\js\i18n\ca.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\cs.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\da.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\de.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\dsb.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\el.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\en.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\es.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\et.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\eu.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\fa.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\fi.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\fr.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\gl.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\he.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\hi.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\hr.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\hsb.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\hu.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\hy.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\id.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\is.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\it.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\ja.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\ka.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\km.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\ko.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\lt.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\lv.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\mk.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\ms.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\nb.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\ne.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\nl.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\pl.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\ps.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\pt-BR.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\pt.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\ro.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\ru.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\sk.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\sl.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\sq.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\sr-Cyrl.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\sr.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\sv.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\th.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\tk.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\tr.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\uk.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\vi.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\zh-CN.js" />
+    <Content Include="Styles\plugins\select2\js\i18n\zh-TW.js" />
+    <Content Include="Styles\plugins\select2\js\select2.full.js" />
+    <Content Include="Styles\plugins\select2\js\select2.full.min.js" />
+    <Content Include="Styles\plugins\select2\js\select2.js" />
+    <Content Include="Styles\plugins\select2\js\select2.min.js" />
+    <Content Include="Styles\plugins\sweetalert2\sweetalert2.all.js" />
+    <Content Include="Styles\plugins\sweetalert2\sweetalert2.all.min.js" />
+    <Content Include="Styles\plugins\sweetalert2\sweetalert2.css" />
+    <Content Include="Styles\plugins\sweetalert2\sweetalert2.js" />
+    <Content Include="Styles\plugins\sweetalert2\sweetalert2.min.css" />
+    <Content Include="Styles\plugins\sweetalert2\sweetalert2.min.js" />
+    <Content Include="Styles\plugins\toastr\toastr.css" />
+    <Content Include="Styles\plugins\toastr\toastr.min.css" />
+    <Content Include="Styles\plugins\toastr\toastr.min.js" />
+    <Content Include="WebForm1.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\RadSpell\de-DE.tdf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\RadSpell\en-US.tdf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\RadSpell\fr-FR.tdf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\adminlte.js" />
+    <Content Include="Scripts\adminlte.min.js" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\core.js" />
+    <Content Include="Scripts\demo.js" />
+    <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery.overlayScrollbars.js" />
+    <Content Include="Scripts\jquery.overlayScrollbars.min.js" />
+    <Content Include="Scripts\jquery.slim.js" />
+    <Content Include="Scripts\jquery.slim.min.js" />
+    <Content Include="Scripts\OverlayScrollbars.js" />
+    <Content Include="Scripts\OverlayScrollbars.min.js" />
+    <Content Include="Scripts\pages\dashboard.js" />
+    <Content Include="Scripts\pages\dashboard2.js" />
+    <Content Include="Scripts\pages\dashboard3.js" />
+    <Content Include="Styles\adminlte.css" />
+    <Content Include="Styles\adminlte.min.css" />
+    <Content Include="Styles\all.css" />
+    <Content Include="Styles\all.min.css" />
+    <Content Include="Styles\alt\adminlte.components.css" />
+    <Content Include="Styles\alt\adminlte.components.min.css" />
+    <Content Include="Styles\alt\adminlte.core.css" />
+    <Content Include="Styles\alt\adminlte.core.min.css" />
+    <Content Include="Styles\alt\adminlte.extra-components.css" />
+    <Content Include="Styles\alt\adminlte.extra-components.min.css" />
+    <Content Include="Styles\alt\adminlte.pages.css" />
+    <Content Include="Styles\alt\adminlte.pages.min.css" />
+    <Content Include="Styles\alt\adminlte.plugins.css" />
+    <Content Include="Styles\alt\adminlte.plugins.min.css" />
+    <Content Include="Styles\brands.css" />
+    <Content Include="Styles\brands.min.css" />
+    <Content Include="Styles\fontawesome.css" />
+    <Content Include="Styles\fontawesome.min.css" />
+    <Content Include="Styles\regular.css" />
+    <Content Include="Styles\regular.min.css" />
+    <Content Include="Styles\solid.css" />
+    <Content Include="Styles\solid.min.css" />
+    <Content Include="Styles\svg-with-js.css" />
+    <Content Include="Styles\svg-with-js.min.css" />
+    <Content Include="Styles\v4-shims.css" />
+    <Content Include="Styles\v4-shims.min.css" />
+    <Content Include="Styles\webfonts\fa-brands-400.svg" />
+    <Content Include="Styles\webfonts\fa-regular-400.svg" />
+    <Content Include="Styles\webfonts\fa-solid-900.svg" />
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Scripts\adminlte.js.map" />
+    <Content Include="Scripts\adminlte.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\jquery.min.map" />
+    <Content Include="Scripts\jquery.slim.min.map" />
+    <Content Include="Styles\adminlte.css.map" />
+    <Content Include="Styles\adminlte.min.css.map" />
+    <Content Include="Styles\alt\adminlte.components.css.map" />
+    <Content Include="Styles\alt\adminlte.components.min.css.map" />
+    <Content Include="Styles\alt\adminlte.core.css.map" />
+    <Content Include="Styles\alt\adminlte.core.min.css.map" />
+    <Content Include="Styles\alt\adminlte.extra-components.css.map" />
+    <Content Include="Styles\alt\adminlte.extra-components.min.css.map" />
+    <Content Include="Styles\alt\adminlte.pages.css.map" />
+    <Content Include="Styles\alt\adminlte.pages.min.css.map" />
+    <Content Include="Styles\alt\adminlte.plugins.css.map" />
+    <Content Include="Styles\alt\adminlte.plugins.min.css.map" />
+    <Content Include="Styles\webfonts\fa-brands-400.eot" />
+    <Content Include="Styles\webfonts\fa-brands-400.ttf" />
+    <Content Include="Styles\webfonts\fa-brands-400.woff" />
+    <Content Include="Styles\webfonts\fa-brands-400.woff2" />
+    <Content Include="Styles\webfonts\fa-regular-400.eot" />
+    <Content Include="Styles\webfonts\fa-regular-400.ttf" />
+    <Content Include="Styles\webfonts\fa-regular-400.woff" />
+    <Content Include="Styles\webfonts\fa-regular-400.woff2" />
+    <Content Include="Styles\webfonts\fa-solid-900.eot" />
+    <Content Include="Styles\webfonts\fa-solid-900.ttf" />
+    <Content Include="Styles\webfonts\fa-solid-900.woff" />
+    <Content Include="Styles\webfonts\fa-solid-900.woff2" />
+    <Content Include="OtoKira.Master" />
+    <Content Include="Styles\plugins\bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="Styles\plugins\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Styles\plugins\bootstrap\js\bootstrap.js.map" />
+    <Content Include="Styles\plugins\bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="Styles\plugins\fontawesome-free\webfonts\fa-brands-400.eot" />
+    <Content Include="Styles\plugins\fontawesome-free\webfonts\fa-brands-400.ttf" />
+    <Content Include="Styles\plugins\fontawesome-free\webfonts\fa-brands-400.woff" />
+    <Content Include="Styles\plugins\fontawesome-free\webfonts\fa-brands-400.woff2" />
+    <Content Include="Styles\plugins\fontawesome-free\webfonts\fa-regular-400.eot" />
+    <Content Include="Styles\plugins\fontawesome-free\webfonts\fa-regular-400.ttf" />
+    <Content Include="Styles\plugins\fontawesome-free\webfonts\fa-regular-400.woff" />
+    <Content Include="Styles\plugins\fontawesome-free\webfonts\fa-regular-400.woff2" />
+    <Content Include="Styles\plugins\fontawesome-free\webfonts\fa-solid-900.eot" />
+    <Content Include="Styles\plugins\fontawesome-free\webfonts\fa-solid-900.ttf" />
+    <Content Include="Styles\plugins\fontawesome-free\webfonts\fa-solid-900.woff" />
+    <Content Include="Styles\plugins\fontawesome-free\webfonts\fa-solid-900.woff2" />
+    <Content Include="Styles\plugins\fullcalendar\main.js.map" />
+    <Content Include="Styles\plugins\icheck-bootstrap\LICENSE" />
+    <Content Include="Styles\plugins\jquery\jquery.min.map" />
+    <Content Include="Styles\plugins\jquery\jquery.slim.min.map" />
+    <Content Include="Styles\plugins\toastr\toastr.js.map" />
+    <Content Include="Styles\css\adminlte.css.map" />
+    <Content Include="Styles\css\adminlte.min.css.map" />
+    <Content Include="Styles\css\alt\adminlte.components.css.map" />
+    <Content Include="Styles\css\alt\adminlte.components.min.css.map" />
+    <Content Include="Styles\css\alt\adminlte.core.css.map" />
+    <Content Include="Styles\css\alt\adminlte.core.min.css.map" />
+    <Content Include="Styles\css\alt\adminlte.extra-components.css.map" />
+    <Content Include="Styles\css\alt\adminlte.extra-components.min.css.map" />
+    <Content Include="Styles\css\alt\adminlte.pages.css.map" />
+    <Content Include="Styles\css\alt\adminlte.pages.min.css.map" />
+    <Content Include="Styles\css\alt\adminlte.plugins.css.map" />
+    <Content Include="Styles\css\alt\adminlte.plugins.min.css.map" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="img\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Styles\plugins\fullcalendar\main.d.ts" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Import Project="$(VSToolsPath)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(VSToolsPath)\TypeScript\Microsoft.TypeScript.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49573</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:49573/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

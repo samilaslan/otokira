@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "otokira1", "otokira\otokira1.csproj", "{0A38D89E-2005-491B-8109-B6C1935F9670}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A38D89E-2005-491B-8109-B6C1935F9670}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A38D89E-2005-491B-8109-B6C1935F9670}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A38D89E-2005-491B-8109-B6C1935F9670}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A38D89E-2005-491B-8109-B6C1935F9670}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {101BA260-C149-4B4B-A1D9-5BE35D1537C2}
+	EndGlobalSection
+EndGlobal
