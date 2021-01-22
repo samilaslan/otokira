@@ -1,0 +1,1071 @@
+DROP TABLE OTOKIRA.SOZLUK CASCADE CONSTRAINTS;
+
+CREATE TABLE OTOKIRA.SOZLUK
+(
+  ST_AS_TABLO_KODU  NUMBER(3)                   NOT NULL,
+  ST_AS_ELE_KODU    VARCHAR2(4 BYTE)            NOT NULL,
+  ST_AS_ELE_ADI     VARCHAR2(100 BYTE)          NOT NULL,
+  ST_AS_SIRANO      NUMBER
+)
+TABLESPACE USERS
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+MONITORING;
+------
+
+DROP TABLE OTOKIRA.MUSTERI_FOTO CASCADE CONSTRAINTS;
+
+CREATE TABLE OTOKIRA.MUSTERI_FOTO
+(
+  MUSTERI_FOTO_ID  NUMBER,
+  MUSTERI_ID       NUMBER,
+  MUSTERI_FOTO     BLOB,
+  ISLEM_DATE       DATE
+)
+LOB (MUSTERI_FOTO) STORE AS SECUREFILE (
+  TABLESPACE  USERS
+  ENABLE      STORAGE IN ROW
+  CHUNK       8192
+  NOCACHE
+  LOGGING
+      STORAGE    (
+                  INITIAL          104K
+                  NEXT             1M
+                  MINEXTENTS       1
+                  MAXEXTENTS       UNLIMITED
+                  PCTINCREASE      0
+                  BUFFER_POOL      DEFAULT
+                 ))
+TABLESPACE USERS
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+MONITORING;
+
+
+CREATE OR REPLACE TRIGGER OTOKIRA.TRG_MUSTERI_FOTO
+BEFORE INSERT
+ON OTOKIRA.MUSTERI_FOTO
+REFERENCING NEW AS New OLD AS Old
+FOR EACH ROW
+BEGIN
+-- For Toad:  Highlight column MUSTERI_FOTO_ID
+  :new.MUSTERI_FOTO_ID := SEQ_MUSTERI_FOTO.nextval;
+END TRG_MUSTERI_FOTO;
+/
+
+
+ALTER TABLE OTOKIRA.MUSTERI_FOTO ADD (
+  CONSTRAINT FK_MUSTERI_IDD 
+  FOREIGN KEY (MUSTERI_ID) 
+  REFERENCES OTOKIRA.MUSTERI (MUSTERI_ID)
+  ON DELETE CASCADE
+  ENABLE VALIDATE);
+
+--------
+
+ALTER TABLE OTOKIRA.MUSTERI
+ DROP PRIMARY KEY CASCADE;
+
+DROP TABLE OTOKIRA.MUSTERI CASCADE CONSTRAINTS;
+
+CREATE TABLE OTOKIRA.MUSTERI
+(
+  MUSTERI_ID  NUMBER,
+  TC          NUMBER(11),
+  AD          VARCHAR2(50 BYTE),
+  SOYAD       VARCHAR2(50 BYTE),
+  TEL         VARCHAR2(20 BYTE),
+  ADRES       VARCHAR2(200 BYTE),
+  EHLIYETNO   VARCHAR2(30 BYTE),
+  YETKI       VARCHAR2(20 BYTE),
+  MAIL        VARCHAR2(100 BYTE),
+  SIFRE       VARCHAR2(200 BYTE)
+)
+TABLESPACE USERS
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+MONITORING;
+
+
+CREATE UNIQUE INDEX OTOKIRA.PK_MUSTERI_ID ON OTOKIRA.MUSTERI
+(MUSTERI_ID)
+LOGGING
+TABLESPACE USERS
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           );
+
+CREATE UNIQUE INDEX OTOKIRA.UNI_MUSTERI ON OTOKIRA.MUSTERI
+(TC)
+LOGGING
+TABLESPACE USERS
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           );
+
+CREATE OR REPLACE TRIGGER OTOKIRA.TRG_MUSTERI
+BEFORE INSERT
+ON OTOKIRA.MUSTERI
+REFERENCING NEW AS New OLD AS Old
+FOR EACH ROW
+BEGIN
+-- For Toad:  Highlight column MUSTERI_ID
+  :new.MUSTERI_ID := SEQ_MUSTERI.nextval;
+END TRG_MUSTERI;
+/
+
+
+ALTER TABLE OTOKIRA.MUSTERI ADD (
+  CONSTRAINT PK_MUSTERI_ID
+  PRIMARY KEY
+  (MUSTERI_ID)
+  USING INDEX OTOKIRA.PK_MUSTERI_ID
+  ENABLE VALIDATE,
+  CONSTRAINT UNI_MUSTERI
+  UNIQUE (TC)
+  USING INDEX OTOKIRA.UNI_MUSTERI
+  ENABLE VALIDATE);
+
+
+----------
+DROP TABLE OTOKIRA.ARAC_KIRALAMA CASCADE CONSTRAINTS;
+
+CREATE TABLE OTOKIRA.ARAC_KIRALAMA
+(
+  KAYIT_ID            NUMBER,
+  ARAC_ID             NUMBER,
+  MUSTERI_ID          NUMBER,
+  BASLANGIC_TARIHI    DATE,
+  BITIS_TARIHI        DATE,
+  KIRALANAN_GUN       NUMBER,
+  KIRLAMAA_UCRETI     NUMBER,
+  ARAC_TESLIM_EDILDI  NUMBER                    DEFAULT 0
+)
+TABLESPACE USERS
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+MONITORING;
+
+
+CREATE OR REPLACE TRIGGER OTOKIRA.TRG_ARAC_KIRALAMA
+BEFORE INSERT
+ON OTOKIRA.ARAC_KIRALAMA
+REFERENCING NEW AS New OLD AS Old
+FOR EACH ROW
+BEGIN
+-- For Toad:  Highlight column KAYIT_ID
+  :new.KAYIT_ID := SEQ_ARAC_KIRALAMA.nextval;
+END TRG_ARAC_KIRALAMA;
+/
+
+
+ALTER TABLE OTOKIRA.ARAC_KIRALAMA ADD (
+  CONSTRAINT CST_FK_ARACID 
+  FOREIGN KEY (ARAC_ID) 
+  REFERENCES OTOKIRA.ARAC (ARAC_ID)
+  ENABLE VALIDATE,
+  CONSTRAINT CST_MUSTERIID 
+  FOREIGN KEY (MUSTERI_ID) 
+  REFERENCES OTOKIRA.MUSTERI (MUSTERI_ID)
+  ENABLE VALIDATE);
+
+
+--------
+
+
+DROP TABLE OTOKIRA.ARAC_FOTO CASCADE CONSTRAINTS;
+
+CREATE TABLE OTOKIRA.ARAC_FOTO
+(
+  ARAC_FOTO_ID  NUMBER,
+  ARAC_ID       NUMBER,
+  ARAC_FOTO     BLOB,
+  ISLEM_DATE    DATE
+)
+LOB (ARAC_FOTO) STORE AS SECUREFILE (
+  TABLESPACE  USERS
+  ENABLE      STORAGE IN ROW
+  CHUNK       8192
+  NOCACHE
+  LOGGING
+      STORAGE    (
+                  INITIAL          104K
+                  NEXT             1M
+                  MINEXTENTS       1
+                  MAXEXTENTS       UNLIMITED
+                  PCTINCREASE      0
+                  BUFFER_POOL      DEFAULT
+                 ))
+TABLESPACE USERS
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+MONITORING;
+
+
+CREATE OR REPLACE TRIGGER OTOKIRA.TRG_ARAC_FOTO
+BEFORE INSERT
+ON OTOKIRA.ARAC_FOTO
+REFERENCING NEW AS New OLD AS Old
+FOR EACH ROW
+BEGIN
+-- For Toad:  Highlight column MUSTERI_FOTO_ID
+  :new.ARAC_FOTO_ID := SEQ_ARAC_FOTO.nextval;
+END TRG_ARAC_FOTO;
+/
+
+
+ALTER TABLE OTOKIRA.ARAC_FOTO ADD (
+  CONSTRAINT CST_ARACID 
+  FOREIGN KEY (ARAC_ID) 
+  REFERENCES OTOKIRA.ARAC (ARAC_ID)
+  ENABLE VALIDATE);
+
+
+-------
+ALTER TABLE OTOKIRA.ARAC
+ DROP PRIMARY KEY CASCADE;
+
+DROP TABLE OTOKIRA.ARAC CASCADE CONSTRAINTS;
+
+CREATE TABLE OTOKIRA.ARAC
+(
+  ARAC_ID           NUMBER,
+  SASE_NO           VARCHAR2(100 BYTE),
+  PLAKA             VARCHAR2(20 BYTE),
+  MARKAMODEL        NUMBER,
+  VITES             NUMBER,
+  YIL               NUMBER,
+  RENK              NUMBER,
+  KM                NUMBER,
+  BAKIM_KM_PERIYOT  NUMBER,
+  MUSAITMI          NUMBER                      DEFAULT 0,
+  SON_MUAYENE_GUN   DATE,
+  SON_BAKIM_KM      NUMBER,
+  SON_BAKIM_GUN     DATE,
+  YAKIT             NUMBER,
+  GUNLUK_UCRET      NUMBER(20)
+)
+TABLESPACE USERS
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+MONITORING;
+
+
+CREATE UNIQUE INDEX OTOKIRA.PK_ARAC_ID ON OTOKIRA.ARAC
+(ARAC_ID)
+LOGGING
+TABLESPACE USERS
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           );
+
+CREATE OR REPLACE TRIGGER OTOKIRA.TRG_ARAC
+BEFORE INSERT
+ON OTOKIRA.ARAC
+REFERENCING NEW AS New OLD AS Old
+FOR EACH ROW
+BEGIN
+-- For Toad:  Highlight column ARAC_ID
+  :new.ARAC_ID := SEQ_ARAC.nextval;
+END TRG_ARAC;
+/
+
+
+ALTER TABLE OTOKIRA.ARAC ADD (
+  CONSTRAINT PK_ARAC_ID
+  PRIMARY KEY
+  (ARAC_ID)
+  USING INDEX OTOKIRA.PK_ARAC_ID
+  ENABLE VALIDATE);
+
+
+
+CREATE OR REPLACE PROCEDURE OTOKIRA.Proc_Arac_Iade
+(
+    P_MUSTERI_ID    IN NUMBER ,   
+    AIOCURSOR       OUT SYS_REFCURSOR 
+)
+AS
+BEGIN
+    OPEN AIOCURSOR FOR
+    SELECT
+        B.KAYIT_ID ID, 
+        m.TC KIMLIKNO,
+        m.AD||' '||m.SOYAD AD_SOYAD,
+        to_char(B.BASLANGIC_TARIHI,'dd.mm.rrrr') BASLANGIC_TARIHI,
+        TO_CHAR(B.BITIS_TARIHI,'DD.MM.RRRR') BITIS_TARIHI,
+        B.KIRALANAN_GUN GUN,
+        B.KIRLAMAA_UCRETI UCRET,
+        (   SELECT  Aa.ARAC_FOTO    FROM ARAC_FOTO  Aa  WHERE Aa.ARAC_ID =a.ARAC_ID and rownum=1  ) dbARAC_FOTO,
+
+        A.ARAC_ID,
+        SASE_NO,
+        PLAKA , 
+        MARKAMODEL , 
+        (SELECT S.ST_AS_ELE_ADI   FROM OTOKIRA.SOZLUK S  WHERE S.ST_AS_TABLO_KODU=1 and ST_AS_ELE_KODU=MARKAMODEL) MARKAMODEL1,
+       
+        VITES ,
+        (SELECT S.ST_AS_ELE_ADI   FROM OTOKIRA.SOZLUK S  WHERE S.ST_AS_TABLO_KODU=2 and ST_AS_ELE_KODU=VITES) VITES1, 
+        YIL, 
+        RENK , 
+        (SELECT S.ST_AS_ELE_ADI   FROM OTOKIRA.SOZLUK S  WHERE S.ST_AS_TABLO_KODU=5 and ST_AS_ELE_KODU=RENK) RENK1, 
+        KM ,
+        MUSAITMI , 
+        YAKIT,
+        (SELECT S.ST_AS_ELE_ADI   FROM OTOKIRA.SOZLUK S  WHERE S.ST_AS_TABLO_KODU=3 and ST_AS_ELE_KODU=YAKIT) YAKIT1 ,
+        GUNLUK_UCRET
+    FROM ARAC A,OTOKIRA.ARAC_KIRALAMA B,MUSTERI m
+    WHERE 
+        B.MUSTERI_ID=m.MUSTERI_ID 
+        and B.ARAC_TESLIM_EDILDI=0 
+        AND A.ARAC_ID=B.ARAC_ID
+        AND B.MUSTERI_ID=case when P_MUSTERI_ID=-1 then B.MUSTERI_ID else P_MUSTERI_ID end ;
+
+
+
+   END;
+/
+------------
+CREATE OR REPLACE PROCEDURE OTOKIRA.PROC_ARAC_IADE_EKLE
+(
+    p_ID          IN NUMBER ,
+    p_ARAC_ID     IN NUMBER,   
+    p_KM          IN NUMBER,
+    SONUC       OUT VARCHAR2 
+)
+AS
+BEGIN
+    update OTOKIRA.ARAC_KIRALAMA k set k.ARAC_TESLIM_EDILDI=1 where k.KAYIT_ID=p_ID;
+    update ARAC a set a.KM=p_KM,a.MUSAITMI=0  where a.ARAC_ID=p_ARAC_ID;
+
+    SONUC:='UPDATE@'||p_ID;
+ 
+
+
+   COMMIT;
+EXCEPTION
+   WHEN OTHERS
+   THEN
+      NULL;
+END;
+/
+
+----------
+CREATE OR REPLACE PROCEDURE OTOKIRA.Proc_Arac_Kirala
+(
+    P_ARAC_ID   IN NUMBER ,   
+    AIOCURSOR   OUT SYS_REFCURSOR 
+)
+AS
+BEGIN
+    OPEN AIOCURSOR FOR
+    SELECT 
+        (
+        SELECT 
+        
+        Aa.ARAC_FOTO 
+        FROM ARAC_FOTO  Aa
+       WHERE Aa.ARAC_ID =a.ARAC_ID and rownum=1        
+        ) dbARAC_FOTO,
+
+        ARAC_ID,
+        SASE_NO,
+        PLAKA , 
+        MARKAMODEL , 
+        (SELECT S.ST_AS_ELE_ADI   FROM OTOKIRA.SOZLUK S  WHERE S.ST_AS_TABLO_KODU=1 and ST_AS_ELE_KODU=MARKAMODEL) MARKAMODEL1,
+       
+        VITES ,
+        (SELECT S.ST_AS_ELE_ADI   FROM OTOKIRA.SOZLUK S  WHERE S.ST_AS_TABLO_KODU=2 and ST_AS_ELE_KODU=VITES) VITES1, 
+        YIL, 
+        RENK , 
+        (SELECT S.ST_AS_ELE_ADI   FROM OTOKIRA.SOZLUK S  WHERE S.ST_AS_TABLO_KODU=5 and ST_AS_ELE_KODU=RENK) RENK1, 
+        KM , 
+        BAKIM_KM_PERIYOT , 
+        MUSAITMI , 
+        TO_CHAR(SON_MUAYENE_GUN ,'DD.MM.RRRR') SON_MUAYENE_GUN, 
+        SON_BAKIM_KM , 
+        TO_CHAR(SON_BAKIM_GUN,'DD.MM.RRRR') SON_BAKIM_GUN,
+        YAKIT,
+        (SELECT S.ST_AS_ELE_ADI   FROM OTOKIRA.SOZLUK S  WHERE S.ST_AS_TABLO_KODU=3 and ST_AS_ELE_KODU=YAKIT) YAKIT1 ,
+        GUNLUK_UCRET
+    FROM ARAC A
+    WHERE A.ARAC_ID = case when P_ARAC_ID=-1 then A.ARAC_ID else P_ARAC_ID end and  A.MUSAITMI=0;
+
+   END;
+/
+--------
+CREATE OR REPLACE PROCEDURE OTOKIRA.Proc_otokira_arac_ekle (
+  P_ARAC_ID           NUMBER,  
+  P_SASE_NO           VARCHAR2,
+  P_PLAKA             VARCHAR2,
+  P_MARKAMODEL        NUMBER,
+  P_VITES             NUMBER,
+  P_YIL               NUMBER,
+  P_RENK              NUMBER,
+  P_KM                NUMBER,
+  P_BAKIM_KM_PERIYOT  NUMBER,
+  P_MUSAITMI          NUMBER,
+  P_SON_MUAYENE_GUN   VARCHAR2,
+  P_SON_BAKIM_KM      NUMBER,
+  P_SON_BAKIM_GUN     VARCHAR2,
+  P_YAKIT             NUMBER,
+  P_GUNLUK_UCRET      NUMBER,
+  SONUC        OUT VARCHAR2 
+)
+
+IS
+BEGIN
+    if P_ARAC_ID=-1 then
+        INSERT INTO ARAC 
+        (
+            SASE_NO           ,
+            PLAKA             ,
+            MARKAMODEL        ,
+            VITES             ,
+            YIL               ,
+            RENK              ,
+            KM                ,
+            BAKIM_KM_PERIYOT  ,
+            MUSAITMI          ,
+            SON_MUAYENE_GUN   ,
+            SON_BAKIM_KM      ,
+            SON_BAKIM_GUN     ,
+            YAKIT             ,
+            GUNLUK_UCRET
+
+        ) 
+        VALUES 
+        (
+            P_SASE_NO           ,
+            P_PLAKA             ,
+            P_MARKAMODEL        ,
+            P_VITES             ,
+            P_YIL               ,
+            P_RENK              ,
+            P_KM                ,
+            P_BAKIM_KM_PERIYOT  ,
+            P_MUSAITMI          ,
+            to_date(P_SON_MUAYENE_GUN,'DD/MM/RRRR'),
+            P_SON_BAKIM_KM      ,
+            to_date(P_SON_BAKIM_GUN ,'DD/MM/RRRR')    ,
+            P_YAKIT             ,
+            P_GUNLUK_UCRET
+        );
+        SONUC:='INSERT@'||SEQ_ARAC.currval;
+    end if;
+  if P_ARAC_ID>-1 then
+      
+    UPDATE ARAC
+    SET
+  SASE_NO         = P_SASE_NO        ,
+  PLAKA           = P_PLAKA          ,
+  MARKAMODEL      = P_MARKAMODEL     ,
+  VITES           = P_VITES          ,
+  YIL             = P_YIL            ,
+  RENK            = P_RENK           ,
+  KM              = P_KM             ,
+  BAKIM_KM_PERIYOT= P_BAKIM_KM_PERIYOT,
+  MUSAITMI        = P_MUSAITMI       ,
+  SON_MUAYENE_GUN = to_date(P_SON_MUAYENE_GUN,'DD/MM/RRRR'),
+  SON_BAKIM_KM    = P_SON_BAKIM_KM   ,
+  SON_BAKIM_GUN   = to_date(P_SON_BAKIM_GUN,'DD/MM/RRRR') ,
+  YAKIT           = P_YAKIT    ,
+  GUNLUK_UCRET    =P_GUNLUK_UCRET      
+   WHERE ARAC_ID=P_ARAC_ID;
+    SONUC:='UPDATE@'||P_ARAC_ID;
+end if;  
+
+
+   COMMIT;
+EXCEPTION
+   WHEN OTHERS
+   THEN
+      NULL;
+END;
+/
+---
+CREATE OR REPLACE PROCEDURE OTOKIRA.Proc_otokira_arac_foto 
+(
+    P_ARAC_FOTO_ID IN NUMBER,
+    P_ARAC_ID IN NUMBER,
+    P_FOTO          IN BLOB,
+    SONUC        OUT VARCHAR2 
+)
+    
+IS
+BEGIN
+   if P_ARAC_FOTO_ID=-1 then
+    insert into OTOKIRA.ARAC_FOTO (ARAC_ID,ARAC_FOTO,ISLEM_DATE) values(P_ARAC_ID,P_FOTO,SYSDATE);
+     SONUC:='INSERT';
+end if;
+  if P_ARAC_FOTO_ID>-1 then
+      
+    UPDATE ARAC_FOTO 
+    SET
+        ARAC_ID= P_ARAC_ID       ,          
+        ARAC_FOTO=  P_FOTO ,
+        ISLEM_DATE=SYSDATE
+    WHERE ARAC_FOTO_ID=P_ARAC_FOTO_ID;
+    SONUC:='UPDATE';
+end if;
+   COMMIT;
+EXCEPTION
+   WHEN OTHERS
+   THEN
+      NULL;
+END;
+/
+------
+CREATE OR REPLACE PROCEDURE OTOKIRA.Proc_otokira_aracfotogetir
+(
+    P_ARAC_ID    IN NUMBER ,
+    AIOCURSOR        OUT SYS_REFCURSOR 
+)
+AS
+BEGIN
+   OPEN AIOCURSOR FOR
+      SELECT 
+        ARAC_FOTO_ID  ,  
+        ARAC_ID  , 
+        ARAC_FOTO 
+        FROM ARAC_FOTO  A
+       WHERE A.ARAC_ID =P_ARAC_ID;
+
+   END  ;
+/
+
+
+---
+CREATE OR REPLACE PROCEDURE OTOKIRA.Proc_otokira_arac_getir
+(
+    P_ARAC_ID   IN NUMBER ,   
+    AIOCURSOR   OUT SYS_REFCURSOR 
+)
+AS
+BEGIN
+    OPEN AIOCURSOR FOR
+    SELECT 
+        ARAC_ID,
+        SASE_NO,
+        PLAKA , 
+        MARKAMODEL , 
+        (SELECT S.ST_AS_ELE_ADI   FROM OTOKIRA.SOZLUK S  WHERE S.ST_AS_TABLO_KODU=1 and ST_AS_ELE_KODU=MARKAMODEL) MARKAMODEL1,
+       
+        VITES ,
+        (SELECT S.ST_AS_ELE_ADI   FROM OTOKIRA.SOZLUK S  WHERE S.ST_AS_TABLO_KODU=2 and ST_AS_ELE_KODU=VITES) VITES1, 
+        YIL, 
+        RENK , 
+        (SELECT S.ST_AS_ELE_ADI   FROM OTOKIRA.SOZLUK S  WHERE S.ST_AS_TABLO_KODU=5 and ST_AS_ELE_KODU=RENK) RENK1, 
+        KM , 
+        BAKIM_KM_PERIYOT , 
+        MUSAITMI , 
+        TO_CHAR(SON_MUAYENE_GUN ,'DD.MM.RRRR') SON_MUAYENE_GUN, 
+        SON_BAKIM_KM , 
+        TO_CHAR(SON_BAKIM_GUN,'DD.MM.RRRR') SON_BAKIM_GUN,
+        YAKIT,
+        (SELECT S.ST_AS_ELE_ADI   FROM OTOKIRA.SOZLUK S  WHERE S.ST_AS_TABLO_KODU=3 and ST_AS_ELE_KODU=YAKIT) YAKIT1 ,
+        GUNLUK_UCRET
+    FROM ARAC A
+    WHERE A.ARAC_ID = case when P_ARAC_ID=-1 then A.ARAC_ID else P_ARAC_ID end;
+
+   END;
+/
+---
+CREATE OR REPLACE PROCEDURE OTOKIRA.Proc_otokiralama 
+(
+    p_AracId            IN NUMBER,
+    p_MusteriId         IN NUMBER,     
+    p_BaslangicTarihi   IN VARCHAR2,
+    p_BitisTarihi       IN VARCHAR2,
+    p_Gun               IN NUMBER,
+    p_Ucret             IN NUMBER,
+    SONUC               OUT VARCHAR2 
+)
+
+IS
+BEGIN
+    update ARAC a set a.MUSAITMI=1 where a.ARAC_ID=p_AracId;
+    INSERT INTO OTOKIRA.ARAC_KIRALAMA
+    (
+        ARAC_ID,          
+        MUSTERI_ID ,      
+        BASLANGIC_TARIHI ,
+        BITIS_TARIHI ,    
+        KIRALANAN_GUN ,   
+        KIRLAMAA_UCRETI  
+    )
+    VALUES
+    (
+        p_AracId,           
+        p_MusteriId ,       
+        TO_DATE(p_BaslangicTarihi ,'DD.MM.RRRR'), 
+        TO_DATE(p_BitisTarihi ,'DD.MM.RRRR'),     
+        p_Gun,              
+        p_Ucret 
+    );
+
+    SONUC:='INSERT';
+
+  
+
+   COMMIT;
+EXCEPTION
+   WHEN OTHERS
+   THEN
+      NULL;
+END;
+/
+
+----
+CREATE OR REPLACE PROCEDURE OTOKIRA.Proc_otokira_musteri_ekle (
+   P_MUSTERI_ID IN NUMBER,
+   P_TC          IN NUMBER,
+   P_AD          IN VARCHAR2,
+   P_SOYAD       IN VARCHAR2,
+   P_TEL         IN VARCHAR2,
+   P_ADRES       IN VARCHAR2,
+   P_EHLIYETNO   IN VARCHAR2,
+   P_YETKI       IN VARCHAR2,
+   P_MAIL        IN VARCHAR2,
+   P_SIFRE       IN VARCHAR2,
+   SONUC        OUT VARCHAR2 
+   )
+IS
+BEGIN
+    if P_MUSTERI_ID=-1 then
+   INSERT INTO MUSTERI (TC,
+                        AD,
+                        SOYAD,
+                        TEL,
+                        ADRES,
+                        EHLIYETNO,
+                        YETKI,
+                        MAIL,
+                        SIFRE)
+        VALUES (P_TC,
+                P_AD,
+                P_SOYAD,
+                P_TEL,
+                P_ADRES,
+                P_EHLIYETNO,
+                P_YETKI,
+                  P_MAIL,
+                  P_SIFRE
+                );
+                SONUC:='INSERT@'||SEQ_MUSTERI.currval;
+end if;
+  if P_MUSTERI_ID>-1 then
+      
+    UPDATE MUSTERI 
+    SET
+    TC= P_TC       ,          
+     AD=  P_AD  ,             
+      SOYAD= P_SOYAD     ,     
+     TEL=  P_TEL        ,      
+      ADRES= P_ADRES        ,   
+     EHLIYETNO=  P_EHLIYETNO  ,
+     YETKI=  P_YETKI        ,    
+     MAIL=  P_MAIL            ,
+     SIFRE= P_SIFRE
+    WHERE MUSTERI_ID=P_MUSTERI_ID;
+    SONUC:='UPDATE@'||P_MUSTERI_ID;
+end if;
+   COMMIT;
+EXCEPTION
+   WHEN OTHERS
+   THEN
+      NULL;
+END;
+/
+
+
+---
+
+CREATE OR REPLACE PROCEDURE OTOKIRA.Proc_otokira_musteri_foto 
+(
+    P_MUSTERI_FOTO_ID IN NUMBER,
+    P_MUSTERI_ID IN NUMBER,
+    P_FOTO          IN BLOB,
+    SONUC        OUT VARCHAR2 
+)
+    
+IS
+BEGIN
+   if P_MUSTERI_FOTO_ID=-1 then
+    insert into OTOKIRA.MUSTERI_FOTO (MUSTERI_ID,MUSTERI_FOTO,ISLEM_DATE)  values(P_MUSTERI_ID,P_FOTO,SYSDATE);
+     SONUC:='INSERT';
+end if;
+  if P_MUSTERI_FOTO_ID>-1 then
+      
+    UPDATE MUSTERI_FOTO 
+    SET
+        MUSTERI_ID= P_MUSTERI_ID       ,          
+        MUSTERI_FOTO=  P_FOTO 
+    WHERE MUSTERI_FOTO_ID=P_MUSTERI_FOTO_ID;
+    SONUC:='UPDATE';
+end if;
+   COMMIT;
+EXCEPTION
+   WHEN OTHERS
+   THEN
+      NULL;
+END;
+/
+
+
+
+----
+
+CREATE OR REPLACE PROCEDURE OTOKIRA.Proc_otokira_musterifotogetir
+(
+    P_MUSTERI_ID    IN NUMBER ,
+    AIOCURSOR        OUT SYS_REFCURSOR 
+)
+AS
+BEGIN
+   OPEN AIOCURSOR FOR
+      SELECT 
+        MUSTERI_FOTO_ID  ,  
+        MUSTERI_ID  , 
+        MUSTERI_FOTO 
+        FROM MUSTERI_FOTO  A
+       WHERE A.MUSTERI_ID =P_MUSTERI_ID;
+
+   END  ;
+/
+----
+CREATE OR REPLACE PROCEDURE OTOKIRA.Proc_otokira_musteri_getir
+(
+    P_MUSTERI_ID    IN NUMBER ,
+    AIOCURSOR        OUT SYS_REFCURSOR 
+)
+AS
+BEGIN
+   OPEN AIOCURSOR FOR
+      SELECT 
+MUSTERI_ID  ,  
+TC  , 
+AD ,  
+SOYAD , 
+TEL , 
+ADRES , 
+EHLIYETNO , 
+YETKI,
+MAIL 
+
+        FROM MUSTERI  A
+       WHERE A.MUSTERI_ID = case when P_MUSTERI_ID=-1 then A.MUSTERI_ID else P_MUSTERI_ID end;
+ EXCEPTION
+      WHEN OTHERS
+      THEN
+         AIOCURSOR := NULL;  
+   END  Proc_otokira_musteri_getir;
+/
+
+
+--
+
+CREATE OR REPLACE PROCEDURE OTOKIRA.Proc_otokira_musteri_guncelle (
+ P_MUSTERI_ID IN NUMBER,
+ P_TC          IN NUMBER,
+   P_AD          IN VARCHAR2,
+   P_SOYAD       IN VARCHAR2,
+   P_TEL         IN VARCHAR2,
+   P_ADRES       IN VARCHAR2,
+   P_EHLIYETNO   IN VARCHAR2,
+   P_YETKI       IN VARCHAR2,
+   P_MAIL IN VARCHAR2
+
+)
+IS
+BEGIN
+  
+UPDATE MUSTERI 
+SET
+TC= P_TC       ,          
+ AD=  P_AD  ,             
+  SOYAD= P_SOYAD     ,     
+ TEL=  P_TEL        ,      
+  ADRES= P_ADRES        ,   
+ EHLIYETNO=  P_EHLIYETNO  ,
+ YETKI=  P_YETKI        ,    
+ MAIL=  P_MAIL             
+WHERE MUSTERI_ID=P_MUSTERI_ID
+;
+
+   COMMIT;
+EXCEPTION
+   WHEN OTHERS
+   THEN
+      NULL;
+END;
+/
+
+----
+
+CREATE OR REPLACE PROCEDURE OTOKIRA.Proc_otokira_musteri_login
+(
+    p_UserName  IN VARCHAR2 ,
+    p_Sifre     IN VARCHAR2,
+    AIOCURSOR   OUT SYS_REFCURSOR 
+)
+AS
+BEGIN
+OPEN AIOCURSOR FOR
+    SELECT
+        MUSTERI_ID ,
+        TC ,
+        AD ,
+        SOYAD ,
+        TEL ,
+        ADRES ,
+        EHLIYETNO ,
+        YETKI,
+        MAIL,
+        SIFRE
+    FROM MUSTERI A
+    WHERE A.SIFRE=P_Sifre AND A.MAIL= p_UserName;
+
+END ;
+/
+----
+
+CREATE OR REPLACE PROCEDURE OTOKIRA.Proc_otokira_musteri_sil(
+P_MUSTERI_ID IN NUMBER 
+)
+IS
+
+BEGIN
+
+DELETE FROM MUSTERI A WHERE A.MUSTERI_ID  =P_MUSTERI_ID;
+
+COMMIT;
+EXCEPTION
+   WHEN OTHERS
+   THEN
+      NULL;
+END;
+/
+-----
+CREATE OR REPLACE PROCEDURE OTOKIRA.Proc_Sil
+(
+    P_ID    IN NUMBER,
+    P_Sorgu IN NUMBER ,
+    SONUC   OUT VARCHAR2 
+)
+IS
+
+BEGIN
+
+if P_Sorgu=1 then
+    DELETE FROM musteri A WHERE A.MUSTERI_ID=P_ID;
+end if; 
+if P_Sorgu=2 then
+    DELETE FROM musteri_FOTO A WHERE A.MUSTERI_FOTO_ID=P_ID;
+end if; 
+
+if P_Sorgu=3 then
+    DELETE FROM ARAC A WHERE A.ARAC_ID=P_ID;
+end if; 
+if P_Sorgu=4 then
+    DELETE FROM ARAC_FOTO A WHERE A.ARAC_FOTO_ID=P_ID;
+end if; 
+
+SONUC:='DELETE';
+COMMIT;
+EXCEPTION
+   WHEN OTHERS
+   THEN
+      NULL;
+END;
+/
+
+
+----------
+
+CREATE OR REPLACE PROCEDURE OTOKIRA.SOZLUK_DOLDUR
+(
+    PARENT_ID   IN NUMBER ,   
+    AIOCURSOR   OUT SYS_REFCURSOR 
+)
+AS
+BEGIN
+    OPEN AIOCURSOR FOR
+    SELECT S.ST_AS_ELE_KODU ITEM_ID,S.ST_AS_ELE_ADI ITEM_NAME
+    FROM OTOKIRA.SOZLUK S 
+    WHERE S.ST_AS_TABLO_KODU=PARENT_ID ORDER BY S.ST_AS_SIRANO ASC;
+
+   END;
+/
+
+DROP TRIGGER OTOKIRA.TRG_ARAC;
+
+CREATE OR REPLACE TRIGGER OTOKIRA.TRG_ARAC
+BEFORE INSERT
+ON OTOKIRA.ARAC
+REFERENCING NEW AS New OLD AS Old
+FOR EACH ROW
+BEGIN
+-- For Toad:  Highlight column ARAC_ID
+  :new.ARAC_ID := SEQ_ARAC.nextval;
+END TRG_ARAC;
+/
+
+----------
+DROP TRIGGER OTOKIRA.TRG_ARAC_FOTO;
+
+CREATE OR REPLACE TRIGGER OTOKIRA.TRG_ARAC_FOTO
+BEFORE INSERT
+ON OTOKIRA.ARAC_FOTO
+REFERENCING NEW AS New OLD AS Old
+FOR EACH ROW
+BEGIN
+-- For Toad:  Highlight column MUSTERI_FOTO_ID
+  :new.ARAC_FOTO_ID := SEQ_ARAC_FOTO.nextval;
+END TRG_ARAC_FOTO;
+/
+
+---
+DROP TRIGGER OTOKIRA.TRG_ARAC_KIRALAMA;
+
+CREATE OR REPLACE TRIGGER OTOKIRA.TRG_ARAC_KIRALAMA
+BEFORE INSERT
+ON OTOKIRA.ARAC_KIRALAMA
+REFERENCING NEW AS New OLD AS Old
+FOR EACH ROW
+BEGIN
+-- For Toad:  Highlight column KAYIT_ID
+  :new.KAYIT_ID := SEQ_ARAC_KIRALAMA.nextval;
+END TRG_ARAC_KIRALAMA;
+/
+
+-----
+DROP TRIGGER OTOKIRA.TRG_MUSTERI;
+
+CREATE OR REPLACE TRIGGER OTOKIRA.TRG_MUSTERI
+BEFORE INSERT
+ON OTOKIRA.MUSTERI
+REFERENCING NEW AS New OLD AS Old
+FOR EACH ROW
+BEGIN
+-- For Toad:  Highlight column MUSTERI_ID
+  :new.MUSTERI_ID := SEQ_MUSTERI.nextval;
+END TRG_MUSTERI;
+/
+
+
+----
+DROP TRIGGER OTOKIRA.TRG_MUSTERI_FOTO;
+
+CREATE OR REPLACE TRIGGER OTOKIRA.TRG_MUSTERI_FOTO
+BEFORE INSERT
+ON OTOKIRA.MUSTERI_FOTO
+REFERENCING NEW AS New OLD AS Old
+FOR EACH ROW
+BEGIN
+-- For Toad:  Highlight column MUSTERI_FOTO_ID
+  :new.MUSTERI_FOTO_ID := SEQ_MUSTERI_FOTO.nextval;
+END TRG_MUSTERI_FOTO;
+/
